@@ -23,7 +23,6 @@ public class Precio {
         this.productos = _productos;
     }
 
-    
     public void precioM() {
         String opcion;
         int opcionInt = 0;
@@ -44,13 +43,15 @@ public class Precio {
 
             if (esNumerico) {
                 if (opcionInt < 1 || opcionInt > 2) {
-                    JOptionPane.showMessageDialog(null, "Esa opción no es válida, volverás al menú de edición de precios");
+                    JOptionPane.showMessageDialog(null,
+                            "Esa opción no es válida, volverás al menú de edición de precios");
                 } else {
                     switch (opcionInt) {
                         case 1:
                             JOptionPane.showMessageDialog(null, "Editando precio");
                             if (categorias.isEmpty()) {
-                                JOptionPane.showMessageDialog(null, "No hay categorías registradas. Registre una categoría primero.");
+                                JOptionPane.showMessageDialog(null,
+                                        "No hay categorías registradas. Registre una categoría primero.");
                                 return;
                             }
 
@@ -64,14 +65,17 @@ public class Precio {
                             do {
                                 esNumerico = true;
                                 try {
-                                    categoriaSeleccionada = Integer.parseInt(JOptionPane.showInputDialog("Seleccione la categoría:\n" + categoriasDisponibles));
+                                    categoriaSeleccionada = Integer.parseInt(JOptionPane
+                                            .showInputDialog("Seleccione la categoría:\n" + categoriasDisponibles));
                                     if (categoriaSeleccionada < 1 || categoriaSeleccionada > categorias.size()) {
-                                        JOptionPane.showMessageDialog(null, "Categoría no válida. Por favor, seleccione una categoría de la lista.");
+                                        JOptionPane.showMessageDialog(null,
+                                                "Categoría no válida. Por favor, seleccione una categoría de la lista.");
                                         esNumerico = false;
                                     }
                                 } catch (NumberFormatException e) {
                                     esNumerico = false;
-                                    JOptionPane.showMessageDialog(null, "Opción no válida. Por favor, ingrese un número.");
+                                    JOptionPane.showMessageDialog(null,
+                                            "Opción no válida. Por favor, ingrese un número.");
                                 }
                             } while (!esNumerico);
 
@@ -81,44 +85,51 @@ public class Precio {
                                 if (productos.get(i).getId_Categoria() == categoria.getNumero())
                                     productosDisponibles += (i + 1) + ". " + productos.get(i).getNombre() + "\n";
                             }
-                            
+
                             if (productosDisponibles.equals("")) {
                                 JOptionPane.showMessageDialog(null, "No hay productos registrados para esa categoria");
                                 return;
                             }
-                            
+
                             int productoSeleccionado = 0;
                             esNumerico = false;
                             do {
                                 esNumerico = true;
                                 try {
-                                    productoSeleccionado = Integer.parseInt(JOptionPane.showInputDialog("Seleccione el producto:\n" + productosDisponibles));
+                                    productoSeleccionado = Integer.parseInt(JOptionPane
+                                            .showInputDialog("Seleccione el producto:\n" + productosDisponibles));
                                     if (productoSeleccionado < 1 || productoSeleccionado > productos.size()) {
-                                        JOptionPane.showMessageDialog(null, "Producto no válida. Por favor, seleccione un producto de la lista.");
+                                        JOptionPane.showMessageDialog(null,
+                                                "Producto no válida. Por favor, seleccione un producto de la lista.");
                                         esNumerico = false;
                                     }
                                 } catch (NumberFormatException e) {
                                     esNumerico = false;
-                                    JOptionPane.showMessageDialog(null, "Opción no válida. Por favor, ingrese un número.");
+                                    JOptionPane.showMessageDialog(null,
+                                            "Opción no válida. Por favor, ingrese un número.");
                                 }
                             } while (!esNumerico);
                             RegistroProducto producto = productos.get(productoSeleccionado - 1);
                             if (producto != null) {
-                                JOptionPane.showMessageDialog(null, "Producto: " + producto.getNombre() + ", Precio actual: " + producto.getPrecio());
+                                JOptionPane.showMessageDialog(null, "Producto: " + producto.getNombre()
+                                        + ", Precio actual: " + producto.getPrecio());
                                 boolean precioValido = false;
                                 int nuevoPrecio = 0;
-    
+
                                 do {
                                     try {
-                                        nuevoPrecio = Integer.parseInt(JOptionPane.showInputDialog("Ingrese el nuevo precio:\n"));
+                                        nuevoPrecio = Integer
+                                                .parseInt(JOptionPane.showInputDialog("Ingrese el nuevo precio:\n"));
                                         precioValido = true; // Si no hay excepción, el precio es válido
                                     } catch (NumberFormatException e) {
-                                         JOptionPane.showMessageDialog(null, "Precio no válido. Por favor, ingrese un número entero.");
+                                        JOptionPane.showMessageDialog(null,
+                                                "Precio no válido. Por favor, ingrese un número entero.");
                                     }
                                 } while (!precioValido);
-    
+
                                 producto.setPrecio(nuevoPrecio);
-                                JOptionPane.showMessageDialog(null, "Producto: " + producto.getNombre() + ", Nuevo Precio: " + producto.getPrecio());
+                                JOptionPane.showMessageDialog(null, "Producto: " + producto.getNombre()
+                                        + ", Nuevo Precio: " + producto.getPrecio());
                             }
 
                             break;
@@ -133,14 +144,3 @@ public class Precio {
         } while (opcionInt != 2);
     }
 }
-        
-        
-        
-        
-        
-        
-    
-    
-    
-    
-

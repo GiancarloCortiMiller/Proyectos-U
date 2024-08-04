@@ -4,8 +4,6 @@
  */
 package com.mycompany.proyecto;
 
-import javax.swing.JOptionPane;
-
 /**
  *
  * @author Giancarlo
@@ -20,7 +18,7 @@ public class RegistroProducto {
         this.nombre = nombre;
         this.precio = precio;
         this.cantidad = cantidad;
-        this.id_categoria =  id_categoria;
+        this.id_categoria = id_categoria;
     }
 
     public String getNombre() {
@@ -38,7 +36,7 @@ public class RegistroProducto {
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
-    
+
     public int getId_Categoria() {
         return id_categoria;
     }
@@ -46,7 +44,7 @@ public class RegistroProducto {
     public void setId_Categoria(int id_categoria) {
         this.id_categoria = id_categoria;
     }
-    
+
     public void setPrecio(int _precio) {
         this.precio = _precio;
     }

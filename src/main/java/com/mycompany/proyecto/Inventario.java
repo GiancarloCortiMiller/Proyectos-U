@@ -5,6 +5,7 @@
 package com.mycompany.proyecto;
 
 import javax.swing.JOptionPane;
+import java.util.ArrayList;
 
 /**
  *
@@ -12,8 +13,14 @@ import javax.swing.JOptionPane;
  */
 public class Inventario {
 
-    public String producto;
-    public int cantidad;
+    ArrayList<RegistroCategoria> categorias = new ArrayList<>();
+    ArrayList<RegistroProducto> productos = new ArrayList<>();
+
+    public Inventario(ArrayList<RegistroCategoria> _categorias, ArrayList<RegistroProducto> _productos) {
+        this.categorias = _categorias;
+        this.productos = _productos;
+
+    }
 
     public void inventarioM() {
         String opcion;
@@ -39,7 +46,7 @@ public class Inventario {
                 } else {
                     switch (opcionInt) {
                         case 1:
-                            JOptionPane.showMessageDialog(null, "Viendo Inventario Completo");
+                            mostrarInventario();
                             break;
                         case 2:
                             JOptionPane.showMessageDialog(null, "Regresando al menú principal");
@@ -51,15 +58,38 @@ public class Inventario {
             }
         } while (opcionInt != 2);
     }
-}
-         
-         
-         
-         
-         
-         
-         
-         
-         
-         
 
+    private void mostrarInventario() {
+        if (categorias.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No hay categorías registradas. Registre una categoría primero.");
+            return;
+        }
+
+        if (productos.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No hay productos registrados. Registre un producto primero.");
+        }
+
+        String categoriasDisponibles = "";
+        for (int i = 0; i < categorias.size(); i++) {
+            categoriasDisponibles += (i + 1) + ". " + categorias.get(i).getNombre() + "\n";
+        }
+        JOptionPane.showMessageDialog(null,
+                "Estas son las categorias disponibles, seleccione la categoria que desea ver para ver los productos que hay junto con su precio."
+                        + "\n" + "Categorias:" + "\n" + categoriasDisponibles);
+
+        int categoriaSeleccionada = 0;
+        categoriaSeleccionada = Integer
+                .parseInt(JOptionPane.showInputDialog("Seleccione la categoría:\n" + categoriasDisponibles));
+
+        RegistroCategoria categoria = categorias.get(categoriaSeleccionada - 1);
+        String productosDisponibles = "";
+        for (int i = 0; i < productos.size(); i++) {
+            if (productos.get(i).getId_Categoria() == categoria.getNumero())
+                productosDisponibles += (i + 1) + ". " + "Producto: " + productos.get(i).getNombre() + " --- Precio: "
+                        + productos.get(i).getPrecio() + " --- Cantidad: " + productos.get(i).getCantidad() + "\n";
+        }
+        JOptionPane.showMessageDialog(null, "Productos:" + "\n" + productosDisponibles);
+
+    }
+
+}

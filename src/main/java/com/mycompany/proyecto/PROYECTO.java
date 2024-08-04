@@ -5,7 +5,6 @@
 package com.mycompany.proyecto;
 
 import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -24,8 +23,8 @@ public class PROYECTO {
 
         do {
             esNumerico = true;
-            JOptionPane.showMessageDialog(null, "1-Registro" + "\n" + "2- Ingresar Productos" 
-                + "\n" + "3- Editar precio" + "\n" + "4- Ver inventario completo" + "\n" + "5- Salir");
+            JOptionPane.showMessageDialog(null, "1-Registro" + "\n" + "2- Ingresar Productos"
+                    + "\n" + "3- Editar precio" + "\n" + "4- Ver inventario completo" + "\n" + "5- Salir");
             opcion = JOptionPane.showInputDialog("Digite su opción del menú principal:");
 
             try {
@@ -52,7 +51,7 @@ public class PROYECTO {
                             precio1.precioM();
                             break;
                         case 4:
-                            Inventario inventario1 = new Inventario();
+                            Inventario inventario1 = new Inventario(categorias, productos);
                             inventario1.inventarioM();
                             break;
                         case 5:
@@ -66,18 +65,3 @@ public class PROYECTO {
         } while (opcionINT != 5);
     }
 }
-
-    
- 
-                    
-            
-        
-    
-    
-
-              
-        
-        
- 
-
-

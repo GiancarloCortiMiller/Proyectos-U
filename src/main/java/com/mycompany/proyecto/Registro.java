@@ -3,9 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.proyecto;
+
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
-import java.util.List;
+
 /**
  *
  * @author Giancarlo
@@ -13,8 +14,9 @@ import java.util.List;
 public class Registro {
     ArrayList<RegistroCategoria> categorias;
     ArrayList<RegistroProducto> productos;
+
     public Registro(ArrayList<RegistroCategoria> _categorias, ArrayList<RegistroProducto> _productos) {
-        this.categorias =  _categorias;
+        this.categorias = _categorias;
         this.productos = _productos;
     }
 
@@ -27,7 +29,8 @@ public class Registro {
 
         do {
             esNumerico = true;
-            JOptionPane.showMessageDialog(null, "1- Registrar Nuevo Producto" + "\n" + "2- Registrar una Categoria" + "\n" + "3- Regresar");
+            JOptionPane.showMessageDialog(null,
+                    "1- Registrar Nuevo Producto" + "\n" + "2- Registrar una Categoria" + "\n" + "3- Regresar");
             opcion = JOptionPane.showInputDialog("Digite su opción del menú Registro:");
 
             try {
@@ -68,16 +71,18 @@ public class Registro {
         for (int i = 0; i < categorias.size(); i++) {
             categoriasDisponibles += (i + 1) + ". " + categorias.get(i).getNombre() + "\n";
         }
-        
+
         int categoriaSeleccionada = 0;
         boolean esNumerico = false;
-        
+
         do {
             esNumerico = true;
             try {
-                categoriaSeleccionada = Integer.parseInt(JOptionPane.showInputDialog("Seleccione la categoría:\n" + categoriasDisponibles));
+                categoriaSeleccionada = Integer
+                        .parseInt(JOptionPane.showInputDialog("Seleccione la categoría:\n" + categoriasDisponibles));
                 if (categoriaSeleccionada < 1 || categoriaSeleccionada > categorias.size()) {
-                    JOptionPane.showMessageDialog(null, "Categoría no válida. Por favor, seleccione una categoría de la lista.");
+                    JOptionPane.showMessageDialog(null,
+                            "Categoría no válida. Por favor, seleccione una categoría de la lista.");
                     esNumerico = false;
                 }
             } catch (NumberFormatException e) {
@@ -87,9 +92,9 @@ public class Registro {
         } while (!esNumerico);
 
         RegistroCategoria categoria = categorias.get(categoriaSeleccionada - 1);
-        
+
         String nombreProducto = JOptionPane.showInputDialog("Digite el nombre del producto:");
-        
+
         // Verificar si el producto ya existe en la categoría
         RegistroProducto productoExistente = null;
         for (RegistroProducto producto : productos) {
@@ -98,9 +103,9 @@ public class Registro {
                 break;
             }
         }
-        
+
         if (productoExistente != null) {
-            JOptionPane.showMessageDialog(null,"Producto ya existente"); 
+            JOptionPane.showMessageDialog(null, "Producto ya existente");
 
         } else {
             int precioProducto = 0;
@@ -118,22 +123,26 @@ public class Registro {
             do {
                 esNumerico = true;
                 try {
-                    cantidadProducto = Integer.parseInt(JOptionPane.showInputDialog("Digite la cantidad del producto:"));
+                    cantidadProducto = Integer
+                            .parseInt(JOptionPane.showInputDialog("Digite la cantidad del producto:"));
                 } catch (NumberFormatException e) {
                     esNumerico = false;
                     JOptionPane.showMessageDialog(null, "Cantidad no válida. Por favor, ingrese un número.");
                 }
             } while (!esNumerico);
 
-            RegistroProducto nuevoProducto = new RegistroProducto(nombreProducto, precioProducto, cantidadProducto, categoria.getNumero());
+            RegistroProducto nuevoProducto = new RegistroProducto(nombreProducto, precioProducto, cantidadProducto,
+                    categoria.getNumero());
 
             int opcionSiNo = 0;
             do {
                 esNumerico = true;
                 try {
-                    opcionSiNo = Integer.parseInt(JOptionPane.showInputDialog("Desea registrar este producto\n1-SI\n2-NO"));
+                    opcionSiNo = Integer
+                            .parseInt(JOptionPane.showInputDialog("Desea registrar este producto\n1-SI\n2-NO"));
                     if (opcionSiNo != 1 && opcionSiNo != 2) {
-                        JOptionPane.showMessageDialog(null, "Opción no válida. Por favor, ingrese 1 para sí o 2 para no.");
+                        JOptionPane.showMessageDialog(null,
+                                "Opción no válida. Por favor, ingrese 1 para sí o 2 para no.");
                         esNumerico = false;
                     }
                 } catch (NumberFormatException e) {
@@ -141,19 +150,19 @@ public class Registro {
                     JOptionPane.showMessageDialog(null, "Opción no válida. Por favor, ingrese 1 para sí o 2 para no.");
                 }
             } while (!esNumerico);
-            
+
             if (opcionSiNo == 1) {
-            productos.add(nuevoProducto);
-            JOptionPane.showMessageDialog(null, "Producto registrado exitosamente.");
+                productos.add(nuevoProducto);
+                JOptionPane.showMessageDialog(null, "Producto registrado exitosamente.");
             } else {
-            JOptionPane.showMessageDialog(null, "Se cancela el registro del producto.");
-            }   
+                JOptionPane.showMessageDialog(null, "Se cancela el registro del producto.");
+            }
         }
     }
 
     private void registrarCategoria() {
         String nombreCategoria = JOptionPane.showInputDialog("Digite el nombre de la categoría:");
-        
+
         // Verificar si la categoría ya existe
         boolean categoriaRepetida = false;
         for (RegistroCategoria categoria : categorias) {
@@ -162,7 +171,7 @@ public class Registro {
                 break;
             }
         }
-        
+
         if (categoriaRepetida) {
             JOptionPane.showMessageDialog(null, "La categoría '" + nombreCategoria + "' ya está registrada.");
             return;
@@ -187,7 +196,8 @@ public class Registro {
         do {
             esNumerico = true;
             try {
-                opcionSiNoCat = Integer.parseInt(JOptionPane.showInputDialog("Desea registrar esta categoría\n1-SI\n2-NO"));
+                opcionSiNoCat = Integer
+                        .parseInt(JOptionPane.showInputDialog("Desea registrar esta categoría\n1-SI\n2-NO"));
                 if (opcionSiNoCat != 1 && opcionSiNoCat != 2) {
                     JOptionPane.showMessageDialog(null, "Opción no válida. Por favor, ingrese 1 para sí o 2 para no.");
                     esNumerico = false;
