@@ -60,6 +60,8 @@ public class Inventario {
     }
 
     private void mostrarInventario() {
+        boolean esNumerico = false;
+
         if (categorias.isEmpty()) {
             JOptionPane.showMessageDialog(null, "No hay categorías registradas. Registre una categoría primero.");
             return;
@@ -67,6 +69,7 @@ public class Inventario {
 
         if (productos.isEmpty()) {
             JOptionPane.showMessageDialog(null, "No hay productos registrados. Registre un producto primero.");
+            return;
         }
 
         String categoriasDisponibles = "";
@@ -78,8 +81,22 @@ public class Inventario {
                         + "\n" + "Categorias:" + "\n" + categoriasDisponibles);
 
         int categoriaSeleccionada = 0;
-        categoriaSeleccionada = Integer
-                .parseInt(JOptionPane.showInputDialog("Seleccione la categoría:\n" + categoriasDisponibles));
+        esNumerico = false;
+        do {
+            esNumerico = true;
+            try {
+                categoriaSeleccionada = Integer
+                        .parseInt(JOptionPane.showInputDialog("Seleccione la categoría:\n" + categoriasDisponibles));
+                if (categoriaSeleccionada < 1 || categoriaSeleccionada > categorias.size()) {
+                    JOptionPane.showMessageDialog(null,
+                            "Categoría no válida. Por favor, seleccione una categoría de la lista.");
+                    esNumerico = false;
+                }
+            } catch (NumberFormatException e) {
+                esNumerico = false;
+                JOptionPane.showMessageDialog(null, "Opción no válida. Por favor, ingrese un número.");
+            }
+        } while (!esNumerico);
 
         RegistroCategoria categoria = categorias.get(categoriaSeleccionada - 1);
         String productosDisponibles = "";
@@ -88,6 +105,12 @@ public class Inventario {
                 productosDisponibles += (i + 1) + ". " + "Producto: " + productos.get(i).getNombre() + " --- Precio: "
                         + productos.get(i).getPrecio() + " --- Cantidad: " + productos.get(i).getCantidad() + "\n";
         }
+
+        if (productosDisponibles.equals("")) {
+            JOptionPane.showMessageDialog(null, "No hay productos registrados para esa categoria");
+            return;
+        }
+
         JOptionPane.showMessageDialog(null, "Productos:" + "\n" + productosDisponibles);
 
     }
