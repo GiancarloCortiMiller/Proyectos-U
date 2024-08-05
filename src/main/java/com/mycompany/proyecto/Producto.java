@@ -72,9 +72,13 @@ public class Producto {
 
                             RegistroCategoria categoria = categorias.get(categoriaSeleccionada - 1);
                             String productosDisponibles = "";
+                            int cantidad = 1 ;
                             for (int i = 0; i < productos.size(); i++) {
                                 if (productos.get(i).getId_Categoria() == categoria.getNumero())
-                                    productosDisponibles += (i + 1) + ". " + productos.get(i).getNombre() + "\n";
+                                {
+                                    productosDisponibles += cantidad + ". " + productos.get(i).getNombre() + "\n";
+                                    cantidad = cantidad + 1;
+                                }
                             }
                             
                             if (productosDisponibles.equals("")) {
@@ -97,7 +101,20 @@ public class Producto {
                                     JOptionPane.showMessageDialog(null, "Opción no válida. Por favor, ingrese un número.");
                                 }
                             } while (!esNumerico);
-                            RegistroProducto producto = productos.get(productoSeleccionado - 1);
+                            
+                            
+                            RegistroProducto producto = null;
+                            
+                            int buscarProducto = 1 ;
+                            for (int i = 0; i < productos.size(); i++) {
+                                if (productos.get(i).getId_Categoria() == categoria.getNumero())
+                                {
+                                    if(buscarProducto ==  productoSeleccionado)
+                                        producto =  productos.get(i);
+                                    else 
+                                        buscarProducto = buscarProducto +1;
+                                }
+                            }
                             if (producto != null) {
                                 JOptionPane.showMessageDialog(null, "Producto: " + producto.getNombre() + ", Cantidad actual: " + producto.getCantidad());
     

@@ -82,13 +82,19 @@ public class Inventario {
                 .parseInt(JOptionPane.showInputDialog("Seleccione la categoría:\n" + categoriasDisponibles));
 
         RegistroCategoria categoria = categorias.get(categoriaSeleccionada - 1);
-        String productosDisponibles = "";
+     String productosDisponibles = "";
+     int cantidad = 1 ;
         for (int i = 0; i < productos.size(); i++) {
             if (productos.get(i).getId_Categoria() == categoria.getNumero())
-                productosDisponibles += (i + 1) + ". " + "Producto: " + productos.get(i).getNombre() + " --- Precio: "
-                        + productos.get(i).getPrecio() + " --- Cantidad: " + productos.get(i).getCantidad() + "\n";
+            {
+            productosDisponibles += cantidad + ". " + productos.get(i).getNombre() + "\n";
+            cantidad = cantidad + 1;
+             }
         }
+        
+
         JOptionPane.showMessageDialog(null, "Productos:" + "\n" + productosDisponibles);
+        
 
     }
 
