@@ -94,7 +94,10 @@ public class Registro {
         RegistroCategoria categoria = categorias.get(categoriaSeleccionada - 1);
 
         String nombreProducto = JOptionPane.showInputDialog("Digite el nombre del producto:");
-
+        if (nombreProducto.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No puedes registar productos vacios. Registre una categoría primero.");
+            return;
+        }
         // Verificar si el producto ya existe en la categoría
         RegistroProducto productoExistente = null;
         for (RegistroProducto producto : productos) {
@@ -162,7 +165,10 @@ public class Registro {
 
     private void registrarCategoria() {
         String nombreCategoria = JOptionPane.showInputDialog("Digite el nombre de la categoría:");
-
+        if (nombreCategoria.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No puedes registar categorias vacias. Registre una categoría primero.");
+            return;
+        }
         // Verificar si la categoría ya existe
         boolean categoriaRepetida = false;
         for (RegistroCategoria categoria : categorias) {
